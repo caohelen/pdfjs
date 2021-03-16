@@ -1,0 +1,54 @@
+<form>
+	<textarea id="hehe" style="width:500pt;height:500px">haha</textarea>
+	<textarea style="width:500pt;height:500px">haha</textarea>
+	<input type=button value="select" onclick="alert(getSelected(document.getElementById('hehe')));">
+	</form>
+	<script type="text/javascript">  
+	// 说明：获取页面上选中的文字 //
+	function getSelectedText() {     
+	if (window.getSelection) {         // This technique is the most likely to be standardized.         
+	// getSelection() returns a Selection object, which we do not document.         
+		return window.getSelection().toString();     
+	}else if (document.getSelection) {         // This is an older, simpler technique that returns a string         
+		return document.getSelection();     
+	}else if (document.selection) {         // This is the IE-specific technique.         
+	// We do not document the IE selection property or TextRange objects.         
+		return document.selection.createRange().text;     
+	} 
+	}
+	// 说明：FireFox 下获取 input 或者 textarea 中选中的文字 
+	function getTextFieldSelection(e) {
+	var e=arguments[0];
+	if (e.selectionStart != undefined && e.selectionEnd != undefined) {
+		var start = e.selectionStart;
+		var end = e.selectionEnd;
+		return e.value.substring(start, end);
+	}else{
+		return "";  // Not supported on this browser
+	}
+	}
+	function getSelected(){
+	if(window.document.all){
+		if (window.getSelection) {         // This technique is the most likely to be standardized.         
+		// getSelection() returns a Selection object, which we do not document.         
+		 return window.getSelection().toString();
+		}else if (document.getSelection) {
+		// This is an older, simpler technique that returns a string         
+		 return document.getSelection();
+		}else if (document.selection) {
+		// This is the IE-specific technique.
+		// We do not document the IE selection property or TextRange objects.         
+		 return document.selection.createRange().text;     
+		}
+	}else{
+		var e=arguments[0];
+		if (e.selectionStart != undefined && e.selectionEnd != undefined) {
+		 var start = e.selectionStart;         
+		 var end = e.selectionEnd;         
+		 return e.value.substring(start, end);     
+		}else{
+		return "";  // Not supported on this browser
+		}
+	}
+	}
+	</script> 
